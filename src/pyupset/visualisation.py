@@ -294,7 +294,7 @@ class UpSetPlot():
 
         ax.barh(bar_bottoms, [len(x) for x in sorted_sets], height=height, color=self.greys[1])
 
-        ax.ticklabel_format(style='sci', axis='x', scilimits=(0, 4))
+        ax.ticklabel_format(style='plain', axis='x')#, scilimits=(0, 4))
 
         self._strip_axes(ax, keep_spines=['bottom'], keep_ticklabels=['bottom'])
 
@@ -378,10 +378,10 @@ class UpSetPlot():
         label_vertical_gap = (ylim[1] - ylim[0]) / 60
 
         for x, y in zip(self.x_values, inters_sizes):
-            ax.text(x, y + label_vertical_gap, "%.2g" % y,
+            ax.text(x, y + label_vertical_gap, "%.0f" % y,
                     rotation=90, ha='center', va='bottom')
 
-        ax.ticklabel_format(style='sci', axis='y', scilimits=(0, 4))
+        ax.ticklabel_format(style='plain', axis='y')#, scilimits=(0, 4))
 
         gap = max(ylim) / 500.0 * 20
         ax.set_ylim(ylim[0] - gap, ylim[1] + gap)
@@ -438,8 +438,8 @@ class UpSetPlot():
             # for c in chain.from_iterable([in_circles, out_circles]):
             # ax.add_patch(c)
             ax.scatter(np.repeat(self.x_values[col_num], len(in_y)), in_y,
-                       color=np.tile(self._color_for_query(frozenset(in_sets)), (len(in_y), 1)),s=300)
-            ax.scatter(np.repeat(self.x_values[col_num], len(out_y)), out_y, color=self.greys[0], s=300)
+                       color=np.tile(self._color_for_query(frozenset(in_sets)), (len(in_y), 1)),s=100)
+            ax.scatter(np.repeat(self.x_values[col_num], len(out_y)), out_y, color=self.greys[0], s=100)
             ax.vlines(self.x_values[col_num], min(in_y), max(in_y), lw=3.5, color=self._color_for_query(frozenset(in_sets)))
 
     def additional_plot(self, ax_index, kind, data_values, graph_args, *, labels=None):
