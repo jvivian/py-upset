@@ -294,7 +294,7 @@ class UpSetPlot():
 
         ax.barh(bar_bottoms, [len(x) for x in sorted_sets], height=height, color=self.greys[1])
 
-        ax.ticklabel_format(style='plain', axis='x')#, scilimits=(0, 4))
+        ax.ticklabel_format(style='sci', axis='x', scilimits=(0, 4))
 
         self._strip_axes(ax, keep_spines=['bottom'], keep_ticklabels=['bottom'])
 
@@ -378,10 +378,10 @@ class UpSetPlot():
         label_vertical_gap = (ylim[1] - ylim[0]) / 60
 
         for x, y in zip(self.x_values, inters_sizes):
-            ax.text(x, y + label_vertical_gap, "%.0f" % y,
+            ax.text(x, y + label_vertical_gap, '{:,}'.format(y),
                     rotation=90, ha='center', va='bottom')
 
-        ax.ticklabel_format(style='plain', axis='y')#, scilimits=(0, 4))
+        ax.ticklabel_format(style='sci', axis='y', scilimits=(0, 4))
 
         gap = max(ylim) / 500.0 * 20
         ax.set_ylim(ylim[0] - gap, ylim[1] + gap)
